@@ -1,0 +1,17 @@
+.menu{
+    grid-column:3/4;
+}
+
+.main{display: grid;
+
+    background-color: #000d13;
+    grid-template:  1fr/1fr minmax(auto,400px)  minmax(auto,1200px) 1fr;
+
+
+}
+.nav{grid-column:2/3;
+    background-color: 111;
+}
+.link{
+    color: white;
+}

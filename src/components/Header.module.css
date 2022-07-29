@@ -1,0 +1,15 @@
+.header{
+    display: grid;
+    grid-template:  1fr/1fr minmax(auto,400px)  minmax(auto,1200px) 1fr;
+    align-items: center;
+
+}
+
+.logo{
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    border-radius: 50%;
+    grid-column:2/3;
+
+}
