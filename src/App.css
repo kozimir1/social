@@ -8,7 +8,16 @@
 ul li {
     list-style: none;
 }
-
+.app-content{
+    grid-column:3/4;
+    border-right:1px solid white;
+    border-left:1px solid white;
+    background-color: #111;
+    border-radius: 20px;
+}
+.app-nav{
+    grid-column:2/3;
+}
 
 
 
