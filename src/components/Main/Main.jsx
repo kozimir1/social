@@ -9,24 +9,23 @@ import News from "./News/News";
 import Music from "./Music/Music";
 
 
-const Main = () => {
+const Main = (props) => {
     return (
-        <BrowserRouter>
             <main className={cl.main}>
                 <div className='app-nav'>
-                    <NavBar/>
+                    <NavBar friends={props.state.navBar.friends}/>
                 </div>
                 <div className="app-content">
                     <Routes>
-                        <Route path="/profile" element={<Profile/>}/>
-                        <Route path="/dialogs/*" element= {<Dialogs/>}/>
+                        <Route path="/profile" element={<Profile state={props.state.profilePage}/>}/>
+                        <Route path="/dialogs/*" element= {<Dialogs  state={props.state.dialogsPage}/>}/>
                         <Route path="/message" element= {<Message/>}/>
                         <Route path='/news' element={<News/>}/>
                         <Route path='/music' element={<Music/>}/>
                     </Routes>
                 </div>
             </main>
-        </BrowserRouter>
+
     )
 }
 export default Main

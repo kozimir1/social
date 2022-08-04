@@ -6,6 +6,17 @@
 .items{
 
 }
+.ava{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: inline-block;
+    background-color: #fd6700;
+}
+.person{
+    display: flex;gap: 10px;
+    align-items: center;
+}
 .person.active{
     color: #ff6b00;
 }
@@ -15,4 +26,17 @@
 }
 .message:not(:last-child){
     margin-bottom: 10px;
+}
+.message:nth-child(even){
+    text-align: right;
+}
+.message:before{
+    display: inline-block;
+    content: "";
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    background-color: #e8e5e5;
+    margin-right:10px ;
 }
