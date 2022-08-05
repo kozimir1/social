@@ -9,8 +9,18 @@ const Dialogs = (props) => {
     const personEl = props.state.persons
         .map(p => <PersonItem name={p.name} id={p.id}/>)
 
-    const messageEL =props.state.messages
-        .map(m=> <PersonMessage message={m.message}/>)
+    const messageEL = props.state.messages
+        .map(m => <PersonMessage message={m.message}/>)
+
+    const createMessageEl = React.createRef()
+    const sendMessage = () => {
+        props.addMessage()
+        // props.updateMessage("")
+    }
+    const onMessageChange =() => {
+        const text = createMessageEl.current.value
+       props.updateMessage(text)
+        }
     return (
         <div className={cl.dialogs}>
             <div className={cl.items}>
@@ -18,6 +28,9 @@ const Dialogs = (props) => {
             </div>
             <div className={cl.messages}>
                 {messageEL}
+                <div><textarea onChange={onMessageChange} ref={createMessageEl} value={props.state.newMessage}/>
+                </div>
+                <button className={cl.button} onClick={sendMessage}>send message</button>
             </div>
         </div>
     )

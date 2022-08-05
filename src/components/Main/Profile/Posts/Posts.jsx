@@ -3,17 +3,27 @@ import cl from './Posts.module.css'
 import Post from "./Post/Post";
 
 
-const Posts =(props)=>{
-    const postEL=props.posts
-        .map(p=> <div><Post message = {p.message} likesCount={p.likesCount}/></div>)
-    return(
-                <div className={cl.posts}>
-                    <div className={cl.title}>Posts</div>
-                    <div><textarea></textarea></div>
-                    <div className="new">New Posts</div>
-                    {[`fsdfsdfsdf`, ` like spread`]}
-                    {postEL}
-                </div>
+const Posts = (props) => {
+
+    const postEL = props.posts
+        .map(p => <div><Post message={p.message} likesCount={p.likesCount}/></div>)
+
+    const createNewPostEl = React.createRef()
+    const addPost = () => {
+        props.addPost()
+    }
+    const onPostChange= () => {
+        const text = createNewPostEl.current.value
+        props.newPostPr(text)
+    }
+    return (
+        <div className={cl.posts}>
+            <div className={cl.title}>Posts</div>
+            <div><textarea onChange={onPostChange} ref={createNewPostEl} value={props.newTextPost}/></div>
+            <button onClick={addPost} className="new">add Post</button>
+            {postEL}
+            {[`fsdfsdfsdf`, ` like spread`]}
+        </div>
     )
 }
 export default Posts

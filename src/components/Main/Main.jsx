@@ -3,10 +3,11 @@ import Profile from "./Profile/Profile";
 import cl from "./Main.module.css";
 import Dialogs from "./Dialogs/Dialogs";
 import NavBar from "./NavBar/NavBar";
-import {BrowserRouter, Route,Routes} from "react-router-dom";
+import {Route,Routes} from "react-router-dom";
 import Message from "./Message/Message";
 import News from "./News/News";
 import Music from "./Music/Music";
+import {addPost} from "../../Redux/state";
 
 
 const Main = (props) => {
@@ -17,8 +18,9 @@ const Main = (props) => {
                 </div>
                 <div className="app-content">
                     <Routes>
-                        <Route path="/profile" element={<Profile state={props.state.profilePage}/>}/>
-                        <Route path="/dialogs/*" element= {<Dialogs  state={props.state.dialogsPage}/>}/>
+                        <Route path="/profile" element={<Profile state={props.state.profilePage} addPost={props.addPost} newPostPr={props.newPostPr}/>}/>
+                        <Route path="/dialogs/*" element= {<Dialogs  state={props.state.dialogsPage} addMessage={props.addMessage}
+                                                                     updateMessage={props.updateMessage}/>}/>
                         <Route path="/message" element= {<Message/>}/>
                         <Route path='/news' element={<News/>}/>
                         <Route path='/music' element={<Music/>}/>
