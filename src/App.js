@@ -4,6 +4,7 @@ import Header from "./components/Header/Header";
 import Main from "./components/Main/Main";
 import Footer from "./components/Footer/Footer";
 import {BrowserRouter} from "react-router-dom";
+import store from "./Redux/state";
 
 
 const App = (props) => {
@@ -11,9 +12,7 @@ const App = (props) => {
         <BrowserRouter>
             <div className="wrapper">
                 <Header/>
-                <Main state={props.state} addPost={props.addPost}
-                      newPostPr={props.newPostPr} addMessage={props.addMessage}
-                      updateMessage={props.updateMessage}/>
+                <Main state={props.state} dispatch = {props.dispatch}/>
                 <Footer/>
             </div>
         </BrowserRouter>

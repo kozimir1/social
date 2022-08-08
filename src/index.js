@@ -1,24 +1,21 @@
 import React from 'react';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import state from "./Redux/state"
+import store from "./Redux/state";
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import {addMessage, addPost, updateMessage, updateNewTextPost, subscribe} from "./Redux/state"
-
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const randerTreeAll=(state)=>{
     root.render(
         <React.StrictMode>
-            <App state={state} addPost={addPost} newPostPr={updateNewTextPost}
-                 addMessage={addMessage} updateMessage={updateMessage}/>
+            <App state={state} dispatch = {store.dispatch.bind(store)}/>
         </React.StrictMode>
     );
 }
-subscribe(randerTreeAll)
+store.subscribe(randerTreeAll)
 
-randerTreeAll(state)
+randerTreeAll(store.getState())
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

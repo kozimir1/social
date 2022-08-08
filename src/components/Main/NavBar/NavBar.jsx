@@ -13,8 +13,8 @@ const  NavBar = (props) => {
                 <li className={cl.item}><NavLink className = {({isActive}) =>  isActive ? cl.active : cl.link }  to='/news'>News</NavLink></li>
                 <li className={cl.item}><NavLink className = {({isActive}) =>  isActive ? cl.active : cl.link }   to='/music'>Music</NavLink></li>
             </ul>
-            <div className={cl.setting}><a href=''>Setting</a></div>
-            <Friends friends={props.friends}/>
+            <div className={cl.setting}><a href='#'>Setting</a></div>
+            <Friends  friends={props.friends}/>
         </nav>
     )
 }
