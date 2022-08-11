@@ -1,6 +1,13 @@
 
+const initialState= {
+    friends: [
+        {id: 1, name: "Andrew"},
+        {id: 2, name: "Sasha"},
+        {id: 3, name: "Sveta"}
+    ],
+}
 
-const navbarReducer = (state, action) => {
+const navbarReducer = (state=initialState, action) => {
 return state
 }
 

@@ -5,7 +5,7 @@ import navbarReducer from "./navbar-reduser";
 
 const store = {
     _callSubcriber() { //let - потому что перезаписываем randerTreeAll на observer
-        if (!console.log(`state was changed`)) {
+        if (console.log(`state was changed`)) {
         }
     },
     _state: {

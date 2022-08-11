@@ -1,19 +1,40 @@
 const ADD_MESSAGE = "ADD-MESSAGE";
 const UPDATE_MESSAGE = "UPDATE-MESSAGE";
 
-const dialogsPageReducer = (state, action) => {
+const initialState = {
+    persons: [
+        {id: 1, name: "Max"},
+        {id: 2, name: "Jake"},
+        {id: 3, name: "Iren"},
+        {id: 4, name: "Andreu"},
+        {id: 5, name: "Mike"},
+        {id: 6, name: "Victor"},
+        {id: 7, name: "Kate"},
+    ],
+    messages: [
+        {id: 1, message: "Hello"},
+        {id: 2, message: "Hi"},
+        {id: 3, message: "well done"},
+        {id: 4, message: "well"},
+    ],
+    newMessage: ``
+}
+
+const dialogsPageReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_MESSAGE:
             const newMessage = {
                 id: 3,
                 message: state.newMessage,
             }
-            state.messages.push(newMessage)
-            state.newMessage = ""
-            return state
+             return {...state,
+                messages: [...state.messages, newMessage],
+                newMessage: "",
+            }
         case UPDATE_MESSAGE:
-            state.newMessage = action.newMessage
-            return state
+            return {...state,
+                newMessage: action.newMessage
+            }
         default:
             return state
     }

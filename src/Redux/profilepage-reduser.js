@@ -1,7 +1,18 @@
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_TEXT_POST = "UPDATE-NEW-TEXT-POST";
 
-const profilePageReducer = (state, action) => {
+const initialState = {
+    posts: [
+        {id: 1, message: 'Hi in my fist prob post', likesCount: `15`},
+        {id: 2, message: "It's my first post", likesCount: `0`},],
+    newTextPost: `Hello everybody`
+}
+
+
+
+const profilePageReducer = (state=initialState, action) => {
+    // сюда переменные лучше не пихать в redusor (лишние операции)
+    // попадаем каждый раз когда dispatchitся action даже если он нас не касается
     switch (action.type) {
         case ADD_POST:
             const newPost = {
@@ -9,12 +20,14 @@ const profilePageReducer = (state, action) => {
                 likesCount: `1`,
                 message: state.newTextPost,
             }
-            state.posts.push(newPost)
-            state.newTextPost = ""
-            return state
+           return{...state,
+                posts:[...state.posts, newPost],
+                newTextPost :"",
+            }
         case UPDATE_NEW_TEXT_POST:
-            state.newTextPost = action.newText
-            return state
+            return{...state,
+                newTextPost: action.newText,
+            }
         default:
             return state
     }

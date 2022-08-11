@@ -2,23 +2,21 @@ import React from 'react';
 import cl from "./Dialogs.module.css";
 import PersonItem from "./PersonItem/PersonItem";
 import PersonMessage from "./PersonMessage/PersonMassage";
-import {onMessageChangeActionCreator, sendMessageActionCreator} from "../../../Redux/dialogspage-reduser";
 
 
 const Dialogs = (props) => {
-    const personEl = props.state.persons
-        .map(p => <PersonItem name={p.name} id={p.id}/>)
+    const personEl = props.persons
+        .map(p => <PersonItem name={p.name} key={p.id}/>)
 
-    const messageEL = props.state.messages
-        .map(m => <PersonMessage message={m.message}/>)
+    const messageEL = props.messages
+        .map(m => <PersonMessage message={m.message} key={m.id}/>)
 
-    const createMessageEl = React.createRef()
-    const sendMessage = () => {
-        props.dispatch(sendMessageActionCreator())
+    const onSendMessage = () => {
+        props.sendMessage()
     }
-    const onMessageChange =() => {
-        const text = createMessageEl.current.value
-        props.dispatch(onMessageChangeActionCreator(text))
+    const onMessageChange =(e) => {
+        const text = e.target.value
+        props.messageChange(text)
         }
     return (
         <div className={cl.dialogs}>
@@ -27,9 +25,9 @@ const Dialogs = (props) => {
             </div>
             <div className={cl.messages}>
                 {messageEL}
-                <div><textarea onChange={ onMessageChange } ref={createMessageEl} value={props.state.newMessage}/>
+                <div><textarea placeholder="enter your message" onChange={ onMessageChange } value={props.newMessage}/>
                 </div>
-                <button className={cl.button} onClick={sendMessage}>send message</button>
+                <button className={cl.button} onClick={onSendMessage}>send message</button>
             </div>
         </div>
     )
