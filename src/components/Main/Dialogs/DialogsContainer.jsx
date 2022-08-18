@@ -1,8 +1,10 @@
 import React from 'react';
 import {onMessageChangeActionCreator, sendMessageActionCreator} from "../../../Redux/dialogspage-reduser";
 import Dialogs from "./Dialogs";
-import StoreContext from "../../../StoreContext";
 import {connect} from "react-redux";
+import {withAuthRedirect} from "../../../hoc/withAuthRedirect";
+import {compose} from "redux";
+
 
 
 // const DialogsContainer = () => {
@@ -29,6 +31,7 @@ const mapStateToProps = (state) => {
         persons: state.dialogsPage.persons,
         messages: state.dialogsPage.messages,
         newMessage: state.dialogsPage.newMessage,
+        // auth: state.auth.isAuth
     }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -42,5 +45,14 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
-export default DialogsContainer
+ //    = (props) =>{
+ //    if (!props.auth) return <Navigate to='/login'/>
+ //     return <Dialogs {...props}/>
+ // }
+//эти 2 вместо compose
+// const AuthRedirect =withAuthRedirect(Dialogs)
+// const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirect)
+
+export default compose(connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect
+)(Dialogs)

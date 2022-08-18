@@ -1,0 +1,14 @@
+.guest {
+    display: flex;
+    column-gap: 20px;
+}
+.content{
+    flex: 1 1 auto;
+    display: grid;
+    gap: 10px;
+    font-size: 1.2rem;
+    line-height: 1.2;
+}
+.image{
+    min-width: 250px;
+}

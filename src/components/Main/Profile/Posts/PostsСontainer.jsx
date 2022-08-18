@@ -1,7 +1,6 @@
 import React from "react";
 import {addPostActionCreator, onPostChangeActionCreator} from "../../../../Redux/profilepage-reduser";
 import Posts from "./Posts";
-import StoreContext from "../../../../StoreContext";
 import {connect} from "react-redux";
 
 

@@ -1,5 +1,6 @@
 import React from "react";
 import cl from "./Header.module.css";
+import LoginContainer from "./LoginContainer";
 
 
 const Header =()=>{
@@ -8,7 +9,10 @@ const Header =()=>{
             <div className={cl.logo}>
                 <img src='src/components/Header/Header' />
             </div>
-            <div className='menu'> Пункт меню</div>
+            <div className={cl.menuBody}>
+                <div className={cl.menu}> Пункт меню</div>
+                <LoginContainer/>
+            </div>
         </header>
     )
 }

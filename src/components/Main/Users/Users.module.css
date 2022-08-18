@@ -5,7 +5,8 @@ h2{
 }
 .container{
     padding: 15px 30px;
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: 30px;
 }
 
@@ -67,7 +68,29 @@ h2{
     border-radius:5px ;
     color: white;
     background-color: #ff6b00;
+    padding: 5px 15px;
+    cursor: pointer;
+}
+.button:disabled{
+    opacity: 0.4;
+}
+.selected{
+    font-weight: 700;
+    font-size: 1.1rem;
 
 }
+.container span:not(:last-child){
+    margin-right: 5px;
 
+
+}
+.container span{
+    padding: 0 5px;
+    cursor: pointer;
+    transition: font-weight 0.2s ease 0s;
+}
+.spanBox{
+    overflow: hidden;
+    padding: 5px;
+}
 
