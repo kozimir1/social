@@ -1,5 +1,5 @@
 const ADD_MESSAGE = "ADD-MESSAGE";
-const UPDATE_MESSAGE = "UPDATE-MESSAGE";
+// const UPDATE_MESSAGE = "UPDATE-MESSAGE";
 
 const initialState = {
     persons: [
@@ -17,7 +17,7 @@ const initialState = {
         {id: 3, message: "well done"},
         {id: 4, message: "well"},
     ],
-    newMessage: ``
+    // newMessage: ``
 }
 
 const dialogsPageReducer = (state = initialState, action) => {
@@ -25,25 +25,25 @@ const dialogsPageReducer = (state = initialState, action) => {
         case ADD_MESSAGE:
             const newMessage = {
                 id: 3,
-                message: state.newMessage,
+                message: action.message,
             }
              return {...state,
                 messages: [...state.messages, newMessage],
                 newMessage: "",
             }
-        case UPDATE_MESSAGE:
-            return {...state,
-                newMessage: action.newMessage
-            }
+        // case UPDATE_MESSAGE:
+        //     return {...state,
+        //         newMessage: action.newMessage
+        //     }
         default:
             return state
     }
 
 }
 // dialogs util
-export const sendMessageActionCreator=()=>({type: ADD_MESSAGE})
+export const sendMessageActionCreator=(message)=>({type: ADD_MESSAGE, message})
 
-export const onMessageChangeActionCreator=(text)=>
-    ({type: UPDATE_MESSAGE,newMessage: text})
+// export const onMessageChangeActionCreator=(text)=>
+//     ({type: UPDATE_MESSAGE,newMessage: text})
 
 export default dialogsPageReducer

@@ -1,15 +1,17 @@
 import React from "react";
 import {connect} from "react-redux";
-import {
-    followThunk,
-    getUsersThunkAC,
-    unfollowThunk
-} from "../../../Redux/users-reduser";
+import {followThunk, getUsersThunkAC, unfollowThunk} from "../../../Redux/users-reduser";
 import Users from "./Users ";
 import Preloader from "../../common/Preloader";
-import {usersAPI} from "../../../api/api";
 import {withAuthRedirect} from "../../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {
+    getFollowingOnProcess,
+    getIsFetching,
+    getPageSize, getPortionSize,
+    getTotalUsersCount, getUsers,
+    getUsersCount,
+} from "../../../Redux/users-selectors";
 
 class UsersContApi extends React.Component {
     constructor(props) {
@@ -18,15 +20,17 @@ class UsersContApi extends React.Component {
 
     componentDidMount() {
         alert(`я отрисовалась в dom деревк`)
-        this.props.getUsersThunkAC(this.props.pageCount, this.props.pageNumber)
+        const {pageCount,pageNumber}=this.props
+        this.props.getUsersThunkAC(pageCount, pageNumber)
     }
 
     componentWillUnmount() {
-        alert(`я скоро сдохну`)
+        alert(`компонента размонтируется`)
     }
 
     onPageNumber = (page) => {
-        this.props.getUsersThunkAC(this.props.pageCount, page)
+        const {pageCount}=this.props
+        this.props.getUsersThunkAC(pageCount, page)
         // this.props.toggleIsFetching(true)
         // this.props.pageNum(page)
         // usersAPI.getUsers(this.props.pageCount, page).then(data => {
@@ -37,26 +41,40 @@ class UsersContApi extends React.Component {
     }
 
     render() {
-        return <> <Preloader isFetching={this.props.isFetching}/>
-            <Users totalCount={this.props.totalCount} pageCount={this.props.pageCount}
+        console.log(`RUS`)
+        return <>  {this.props.isFetching ? <Preloader/>:null }
+            <Users totalItemsCount={this.props.totalCount} pageCount={this.props.pageCount}
                    onPageNumber={this.onPageNumber} pageNumber={this.props.pageNumber}
                    users={this.props.users} unfollow={this.props.unfollow} folow={this.props.folow}
                    toggleONFollowing={this.props.toggleONFollowing} followingOnProcess={this.props.followingOnProcess}
                    followThunk={this.props.followThunk} unfollowThunk={this.props.unfollowThunk}
+                   portionSize={this.props.portionSize}
             />
         </>
     }
 
 }
 
+// const mapStateToProps = (state) => {
+//     return {
+//         users: state.usersPage.users,
+//         pageNumber: state.usersPage.pageNumber,
+//         pageCount: state.usersPage.pageCount,
+//         totalCount: state.usersPage.totalCount,
+//         isFetching: state.usersPage.isFetching,
+//         followingOnProcess: state.usersPage.followingOnProcess
+//     }
+// }
 const mapStateToProps = (state) => {
+    console.log(`mapStateToProps  users`)
     return {
-        users: state.usersPage.users,
-        pageNumber: state.usersPage.pageNumber,
-        pageCount: state.usersPage.pageCount,
-        totalCount: state.usersPage.totalCount,
-        isFetching: state.usersPage.isFetching,
-        followingOnProcess: state.usersPage.followingOnProcess
+        users: getUsers(state),
+        pageNumber: getPageSize(state),
+        pageCount: getUsersCount(state),
+        totalCount: getTotalUsersCount(state),
+        isFetching: getIsFetching(state),
+        followingOnProcess: getFollowingOnProcess(state),
+        portionSize: getPortionSize(state)
     }
 }
 /*const mapDispatchToProps = (dispatch) => {

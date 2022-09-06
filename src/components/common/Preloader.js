@@ -3,7 +3,7 @@ import spinner from "../../img/Spinner.svg";
 
 const Preloader = (props)=>{
    return (
-       <div style={{textAlign: "center"}}>{props.isFetching ? <img src={spinner} alt=""></img> : null}</div>
+       <div style={{textAlign: "center",}}><img  role={'main'} src={spinner} alt=""></img></div>
 )
 
 }

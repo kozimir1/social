@@ -10,7 +10,9 @@ const Login = (props) => {
                 <img src={props.avatar ? props.avatar : image}></img>
                 </div>
                 : undefined }
-            <div className={cl.login}>{props.isAuth ? props.login : <NavLink to="/login"> Login </NavLink>}</div>
+            <div className={cl.login}>{props.isAuth ?
+                <div>{props.login} - <button onClick={()=>props.logout()}>logout</button></div>
+                : <NavLink to="/login"> Login </NavLink>}</div>
         </div>
 )
 }

@@ -2,8 +2,7 @@ import React from "react";
 import cl from './Person.module.css'
 import pic from '../../../../img/Image.jpg'
 
-const Person = (props) => {
-
+const Person= React.memo((props)=> {
     return (
         <div>
             <div className={cl.image}><img src={pic} alt='картинки нет'/></div>
@@ -11,7 +10,7 @@ const Person = (props) => {
         </div>
 
     )
-}
+})
 
 
 export default Person

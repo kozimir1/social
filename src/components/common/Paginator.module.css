@@ -1,0 +1,21 @@
+.selected{
+    font-weight: 700;
+    font-size: 1.1rem;
+
+}
+.spanBox{
+    overflow: hidden;
+    padding: 5px;
+}
+.button{
+    flex: 1 1 auto;
+    display: inline flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 30px;
+    border-radius:5px ;
+    color: white;
+    background-color: #ff6b00;
+    padding: 5px 15px;
+    cursor: pointer;
+}

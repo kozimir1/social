@@ -1,0 +1,16 @@
+
+.errorMessage{
+    color: red;
+}
+.formItem{
+    display: inline-block;
+    border: 2px solid transparent;
+    transition: border 0.3s ease 0s ;
+}
+.formItem.error{
+    border: 2px solid red;
+}
+.formError{
+    display: inline-block;
+    color: red;
+}

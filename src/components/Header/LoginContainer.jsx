@@ -1,14 +1,12 @@
 import React from "react";
 import Login from "./Login";
-import * as axios from "axios";
 import {connect} from "react-redux";
-import {authThunk, setAuthUserAvatar, setAuthUserData} from "../../Redux/auth-reduser";
-import {authAPI, profileAPI} from "../../api/api";
+import {authThunk, logout} from "../../Redux/auth-reduser";
 
 
 class LoginContainer extends React.Component {
-    componentDidMount() {
-        this.props.authThunk()
+    componentDidMount(){
+    // this.props.authThunk()
         // authAPI.authMe().then(data => {
         //     const {id, login, email} = data.data
         //     this.props.setAuthUserData(id, login, email)
@@ -35,4 +33,4 @@ const mstp = (state) => {
     }
 }
 
-export default connect(mstp, {authThunk})(LoginContainer)
+export default connect(mstp, {authThunk,logout})(LoginContainer)
