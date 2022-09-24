@@ -9,7 +9,7 @@ const Header =()=>{
             <div className={cl.logo}>
             </div>
             <div className={cl.menuBody}>
-                <div className={cl.menu}> Пункт меню</div>
+                <div className={cl.menu}> </div>
                 <LoginContainer/>
             </div>
         </header>

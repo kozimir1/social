@@ -13,6 +13,14 @@ import store from "./Redux/redux-store";
 class App extends React.Component {
     componentDidMount() {
         this.props.initialize()
+        window.addEventListener("unhandledrejection", event => {
+            alert(`unhandledRejection: ${event.reason.message}`);
+        });
+    }
+    componentWillUnmount() {
+        window.removeEventListener("unhandledrejection", event => {
+            alert(`unhandledRejection: ${event.reason.message}`);
+        });
     }
 
     render() {

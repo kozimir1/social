@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import cl from './Guest.module.css'
 
 
 const ProfileStatusWithUseState = (props) => {
@@ -32,6 +33,12 @@ const ProfileStatusWithUseState = (props) => {
                            value={status}/>
                 </div>
             }
+            {props.statusError &&
+                <div className={cl.container}> <div style={{textAlign: "right"}}><span className={cl.close}
+                onClick={()=>props.statusErrorAC(null)}>X</span></div>
+                    <div>{props.statusError}</div>
+                </div>}
+
         </div>
     )
 

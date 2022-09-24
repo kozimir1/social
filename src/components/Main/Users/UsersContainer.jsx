@@ -19,13 +19,13 @@ class UsersContApi extends React.Component {
     }
 
     componentDidMount() {
-        alert(`я отрисовалась в dom деревк`)
+        alert(`я отрисовалась в dom дереве`)
         const {pageCount,pageNumber}=this.props
         this.props.getUsersThunkAC(pageCount, pageNumber)
     }
 
     componentWillUnmount() {
-        alert(`компонента размонтируется`)
+        alert(`компонента размонтирована`)
     }
 
     onPageNumber = (page) => {

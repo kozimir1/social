@@ -20,8 +20,10 @@ const Main = (props) => {
                 <NavBar/>
             </div>
             <div className="app-content">
-                <React.Suspense fallback={<div>Загрузка...</div>}>
+                <React.Suspense fallback={<div>Loading...</div>}>
                     <Routes>
+                        <Route path="*" element={<div>404 not found</div>}/>
+                        <Route path="/" element={<ProfileContainer/>}/>
                         <Route path="/profile/*" element={<ProfileContainer/>}/>
                         <Route path="/dialogs/*" element={<DialogsContainer/>}/>
                         <Route path="/message" element={<Message/>}/>

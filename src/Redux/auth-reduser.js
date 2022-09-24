@@ -1,10 +1,11 @@
 // noinspection LanguageDetectionInspection
 
-import {authAPI, profileAPI} from "../api/api";
+import {authAPI, profileAPI, securityAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 
 const SET_USER_DATA= 'social/auth/SET_USER_DATA';
 const SET_USER_AVATAR ='social/auth/SET_USER_AVATAR';
+const GET_CAPTCHA_URL_SUCCESS ='social/auth/GET_CAPTCHA_URL_SUCCESS';
 
 
 const initialState = {
@@ -12,7 +13,8 @@ const initialState = {
     login: null,
     email: null,
     avatar:null,
-    isAuth: false
+    isAuth: false,
+    captchaURL: null // if captcha not use
 
 }
 
@@ -21,6 +23,7 @@ const authReducer = (state = initialState, action) => {
     // попадаем каждый раз когда dispatchitся action даже если он нас не касается
     switch (action.type) {
         case SET_USER_DATA:
+        case GET_CAPTCHA_URL_SUCCESS:
             return {
              ...state, ...action.payload
             }
@@ -36,7 +39,9 @@ const authReducer = (state = initialState, action) => {
 
 
 // profile util
-export const setAuthUserData = (userId,login,email, isAuth) => ({type: SET_USER_DATA,payload:{userId,login,email,isAuth}})
+export const setAuthUserData = (userId,login,email, isAuth, captchaURL) => ({type: SET_USER_DATA,payload:{userId,login,email,isAuth,captchaURL}})
+export const getCaptchaURLSuccess = (captchaURL) => ({type: GET_CAPTCHA_URL_SUCCESS,payload:{captchaURL}})
+
 export const setAuthUserAvatar = (avatar) => ({type: SET_USER_AVATAR, avatar})
 
 export const authThunk = ()=> async (dispatch)=>{
@@ -52,22 +57,32 @@ export const authThunk = ()=> async (dispatch)=>{
        }
 
 }
-export const login = (email, password, rememberMe)=> async (dispatch)=>{
-    const response = await authAPI.login(email, password, rememberMe)
+export const login = (email, password, rememberMe, captcha = null)=> async (dispatch)=>{
+    const response = await authAPI.login(email, password, rememberMe, captcha)
             if(response.data.resultCode===0){
                 dispatch(authThunk())
             }
             else{
+                if(response.data.resultCode===10){
+                    dispatch(getCaptchaURL())
+                }
+
                 let error = response.data.fieldsErrors.length>0 ? {login: response.data.fieldsErrors[0].error}
                         : {_error: response.data.messages[0]}
                 dispatch (stopSubmit( `Login`,error))
             }
 }
+
 export const logout = ()=> async (dispatch)=>{
    const response = await authAPI.logout()
             if(response.data.resultCode===0){
-              dispatch (setAuthUserData(null,null, null, false))
+              dispatch (setAuthUserData(null,null, null, false, null))
             }
+}
+export const getCaptchaURL = ()=> async (dispatch)=>{
+   const response = await securityAPI.getCaptchaURL()
+           const captchaURL =response.data.url
+              dispatch (getCaptchaURLSuccess(captchaURL))
 }
 
 export default authReducer

@@ -1,4 +1,5 @@
 import * as axios from "axios";
+import {saveProfile} from "../Redux/profilepage-reduser";
 
 const instance = axios.create({
     baseURL: `https://social-network.samuraijs.com/api/1.0/`,
@@ -27,13 +28,19 @@ export const authAPI = {
     authMe() {
         return instance.get(`auth/me`)
     },
-    login (email, password, rememberMe) {
-        return instance.post(`/auth/login`, {email, password, rememberMe})
+    login (email, password, rememberMe, captcha) {
+        return instance.post(`/auth/login`, {email, password, rememberMe, captcha})
     },
     logout () {
         return instance.delete(`/auth/login`)
     }
 }
+export const securityAPI = {
+    getCaptchaURL() {
+        return instance.get(`/security/get-captcha-url`)
+    },
+}
+
 export const profileAPI = {
     profile(id) {
         return instance.get(`profile/${id}`)
@@ -43,7 +50,21 @@ export const profileAPI = {
         return instance.get(`/profile/status/${id}`)
             .then(response => response.data)
     },
+
     setStatus(status) {
         return instance.put(`/profile/status/`, {status: status})
+    },
+    saveProfile(profile) {
+        return instance.put(`/profile`, profile)
+    },
+
+    savePhoto(photo) {
+        const formData = new FormData();
+        formData.append("image", photo)
+        return instance.put(`/profile/photo`, formData ,{
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
     }
 }
